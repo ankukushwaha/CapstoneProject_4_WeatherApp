@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forcasting app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <form action="/" method="post" class="form">
+      <input type="text" placeholder="Enter your city name" name="name" />
+      <button>Search</button>
+    </form>
+    <% if(locals.content){  %>
+      <% if(content.length == 0){ %>
+        <h1 id="firstH1">No City Found</h1>
+      <% } else{ %>
+        <form action="/get" method="post" class="buttons">
+          <% for(let i=0;i<content.length;i++){  %>
+                <button class="btn" name="q" value="<%= content[i].lat %>,<%= content[i].lon %>,<%= content[i].name %>">
+                  <h1 id="secondH1"><%= content[i].name %></h1>
+                  <h3 id="firstH3"><%= content[i].region %> , <%= content[i].country %></h3>
+                </button>
+          <% } %>
+        </form>
+      <% } %>
+    <% } else{ %>
+      <h1 id="firstH1">Enter your city name</h1>
+    <%  } %>
+      
+
+    <%- include("footer.js") %>
+  </body>
+</html>

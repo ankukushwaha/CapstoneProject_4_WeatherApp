@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forcasting app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <form action="/" method="post" class="form">
+      <input type="text" placeholder="Enter your city name" name="name" />
+      <button>Search</button>
+    </form>
+    <% if(locals.content){ %>
+
+      <div class="container">
+        <div class="name">
+          <h1><%= content.location.name %> (<%= content.location.region %>) ,  <%= content.location.country %></h1>
+          <!-- <p>8 october 2023, 10:30 A.M</p>  -->
+          <p><%= d.getDate() %> <%= month %> <%= d.getFullYear() %>,  <%= Time %> <%= AmPm %> (<%= day %>)</p>
+        </div>
+        <div class="container2">
+          <div class="image">
+            <img src="<%= content.current.condition.icon %>" alt="image">
+          </div>
+          <div class="v1"></div>
+          <div class="container3">
+            <div class="h3">
+              <h3><%= content.current.temp_c %>°C</h3>
+              <p>Temperature</p>
+            </div>
+            <div class="h3">
+              <h3><%= dayOrNight %></h3>
+            </div>
+            <div class="h3">
+              <h3><%= content.current.wind_mph %> mph</h3>
+              <p>Wind(miles/h)</p>
+            </div>
+            <div class="h3">
+              <h3><%= content.current.temp_f %>°F</h3>
+              <p>Temperature</p>
+            </div>
+            <div class="h3">
+              <h3><%= content.current.condition.text %></h3>
+            </div>
+            <div class="h3">
+              <h3><%= content.current.wind_kph %> kph</h3>
+              <p>Wind(Km/h)</p>
+            </div>
+          </div>
+        </div>
+        <div class="container4">
+          <div>
+            <h3><%= content.location.lat %>°</h3>
+            <p>Latitude</p>
+          </div>
+          <div>
+            <h3><%= content.location.lon %>°</h3>
+            <p>Longitude</p>
+          </div>
+          <div>
+            <h3><%= content.current.cloud %>%</h3>
+            <p>Cloud</p>
+          </div>
+          <div>
+            <h3><%= content.current.humidity %>%</h3>
+            <p>Humidity</p>
+          </div>
+          <div>
+            <h3><%= content.current.pressure_mb %> mb</h3>
+            <p>Pressure(millibars)</p>
+          </div>
+        </div>
+      </div>
+    <% }else{ %>
+      <h1>Unable to fetch data. Sorry for the inconvenience</h1>
+    <% } %>
+
+    <%- include("footer.js") %>
+  </body>
+</html>
